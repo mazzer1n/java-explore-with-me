@@ -9,7 +9,6 @@ services:
     depends_on:
       - stats-db
     environment:
-      - STATS_CLIENT_URL=http://stats-server:9090
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/stats
 
   stats-db:
