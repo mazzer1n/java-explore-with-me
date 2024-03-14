@@ -27,8 +27,8 @@ services:
   #      - TZ=Europe/Moscow
 
   ewm-service:
-    container_name: ewm-server
-    build: ewm-server
+    container_name: ewm-service
+    build: ewm-service
     ports:
       - "8080:8080"
       - "8081:8081"
