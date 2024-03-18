@@ -1,28 +1,24 @@
 package ru.practicum.event.service.implementations;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.service.implementations.CategoryPublicService;
+import ru.practicum.exception.exceptions.*;
 import ru.practicum.event.dto.*;
 import ru.practicum.event.model.Event;
 import ru.practicum.event.model.states.EventLifecycleState;
 import ru.practicum.event.repository.EventRepository;
 import ru.practicum.event.service.EventPrivateServiceInterface;
-import ru.practicum.exception.exceptions.EventBadRequestException;
-import ru.practicum.exception.exceptions.EventConflictException;
-import ru.practicum.exception.exceptions.EventNotFoundException;
 import ru.practicum.location.model.Location;
 import ru.practicum.location.service.LocationService;
 import ru.practicum.user.model.User;
 import ru.practicum.user.service.UserService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static ru.practicum.category.dto.CategoryMapper.toCategoryFromCategoryDto;
@@ -57,8 +53,8 @@ public class EventPrivateService implements EventPrivateServiceInterface {
         Pageable pageable = PageRequest.of(from / size, size);
 
         List<EventShortDto> result = eventRepository.findAllByInitiatorId(userId, pageable).stream()
-            .map(EventMapper::toEventShortDto)
-            .collect(Collectors.toList());
+                .map(EventMapper::toEventShortDto)
+                .collect(Collectors.toList());
 
         result = result.isEmpty() ? new ArrayList<>() : result;
 
@@ -134,14 +130,20 @@ public class EventPrivateService implements EventPrivateServiceInterface {
 
     public Event getExistingEvent(long id) {
         return eventRepository.findById(id).orElseThrow(
-            () -> new EventNotFoundException("Событие с id " + id + " не найдено.")
+                () -> new EventNotFoundException("Событие с id " + id + " не найдено.")
         );
+    }
+
+    public void validateEventToAddComment(Event event) {
+        if (event.getState() != PUBLISHED) {
+            throw new CommentConflictException("Невозможно оставить комментарий на неопубликованное событие");
+        }
     }
 
     private void validateDateForUpdateAndCreateByUser(LocalDateTime eventDate) {
         if (eventDate.isBefore(LocalDateTime.now().plusHours(2))) {
             throw new EventBadRequestException(
-                "Дата начала изменяемого события должна быть не ранее чем за 2 часа от даты публикации"
+                    "Дата начала изменяемого события должна быть не ранее чем за 2 часа от даты публикации"
             );
         }
     }
@@ -153,14 +155,14 @@ public class EventPrivateService implements EventPrivateServiceInterface {
         event.setInitiator(user);
         event.setCategory(category);
         event.setLocation(location);
-        event.setState(PENDING);
+        event.setState(EventLifecycleState.PENDING);
         event.setCreatedOn(LocalDateTime.now());
     }
 
     private void validateStateForUpdateByUser(EventLifecycleState state) {
         if (state.equals(PUBLISHED)) {
             throw new EventConflictException(
-                "Изменить можно только отмененные события или события в состоянии ожидания модерации"
+                    "Изменить можно только отмененные события или события в состоянии ожидания модерации"
             );
         }
     }
