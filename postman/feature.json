@@ -217,7 +217,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"title\": \"Gala-concert\",\n    \"annotation\": \"Singing and dancing with us\",\n    \"description\": \"Are you tired of everyday routine? Come with us\",\n    \"eventDate\": \"2023-12-30 19:17:13\",\n    \"category\": \"1\",\n    \"location\": {\n        \"lat\": \"54.12\",\n        \"lon\": \"82.13\"\n    }\n}",
+              "raw": "{\n    \"title\": \"Gala-concert\",\n    \"annotation\": \"Singing and dancing with us\",\n    \"description\": \"Are you tired of everyday routine? Come with us\",\n    \"eventDate\": \"2024-03-30 19:17:13\",\n    \"category\": \"1\",\n    \"location\": {\n        \"lat\": \"54.12\",\n        \"lon\": \"82.13\"\n    }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1747,7 +1747,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"title\": \"Wow\",\n    \"annotation\": \"Singing and dancing with us\",\n    \"description\": \"Are you tired of everyday routine? Come with us\",\n    \"eventDate\": \"2023-12-30 19:17:13\",\n    \"category\": \"1\",\n    \"location\": {\n        \"lat\": \"54.12\",\n        \"lon\": \"82.13\"\n    }\n}",
+              "raw": "{\n    \"title\": \"Wow\",\n    \"annotation\": \"Singing and dancing with us\",\n    \"description\": \"Are you tired of everyday routine? Come with us\",\n    \"eventDate\": \"2024-03-30 19:17:13\",\n    \"category\": \"1\",\n    \"location\": {\n        \"lat\": \"54.12\",\n        \"lon\": \"82.13\"\n    }\n}",
               "options": {
                 "raw": {
                   "language": "json"
