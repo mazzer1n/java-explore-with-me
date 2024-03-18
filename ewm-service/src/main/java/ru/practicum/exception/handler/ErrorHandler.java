@@ -12,6 +12,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import ru.practicum.exception.exceptions.BadRequestException;
 import ru.practicum.exception.exceptions.ConflictException;
 import ru.practicum.exception.exceptions.NotFoundException;
+import ru.practicum.exception.handler.ApiError;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package ru.practicum.exception.handler;
+package ru.practicum.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
